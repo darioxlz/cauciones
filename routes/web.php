@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 // Show Register Page & Login Page
 Route::get('/login', [LoginController::class, 'show'])->name('form.login')->middleware('guest');
-Route::get('/register', [RegisterController::class, 'show'])->name('form.register')/*->middleware('guest')*/;
+Route::get('/register', [RegisterController::class, 'show'])->name('form.register')->middleware('guest');
 
 
 // Register & Login User

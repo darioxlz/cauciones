@@ -25,8 +25,8 @@ class RegisterController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'cedula' => 'required|integer|unique:individuals,cedula',
-            'firstnames' => 'required|alpha|min:3',
-            'surnames' => 'required|alpha|min:3',
+            'firstnames' => 'required|min:3',
+            'surnames' => 'required|min:3',
             'birthday' => 'required|date',
             'phone_number' => 'nullable|integer',
             'sex' => 'required|in:M,F',
@@ -49,8 +49,10 @@ class RegisterController extends Controller
         $individual = Individual::create(array_merge($individual_data, array('address_id' => $address->address_id, 'created_at' => date('Y-m-d'))));
 
 
-        $user_data = $request->only(['password']);
-        User::create(array_merge($user_data, array('individual_id' => $individual->individual_id, 'permissions' => 'test')));
+        if ($request->has('password')) {
+            $user_data = $request->only(['password']);
+            User::create(array_merge($user_data, array('individual_id' => $individual->individual_id, 'permissions' => 'test')));
+        }
 
         return redirect()->route('form.login');
     }

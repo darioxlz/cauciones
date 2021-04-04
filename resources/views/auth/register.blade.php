@@ -4,7 +4,7 @@
     <script>
         const select_states = document.getElementById('state');
         const select_municipalities = document.getElementById('municipality');
-        const select_cities = document.getElementById('city');
+        const select_cities = document.getElementById('city_id');
 
         const data_municipalities = @json($municipalities);
         const data_cities = @json($cities);
@@ -191,7 +191,7 @@
                             <label for="city_id" class="col-md-4 col-form-label text-md-right">Ciudad</label>
 
                             <div class="col-md-6">
-                                <select id="city" name="city_id">
+                                <select id="city_id" name="city_id">
                                     <option value="INVALID">Seleccione una ciudad</option>
                                 </select>
                             </div>
