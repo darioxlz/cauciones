@@ -25,11 +25,11 @@ class CreateIndividualsTable extends Migration
             $table->date('created_at')->nullable(false);
             $table->date('updated_at')->nullable(true);
             $table->date('deleted_at')->nullable(true);
-            $table->unsignedBigInteger('created_by')->nullable(false);
+            $table->unsignedBigInteger('created_by')->nullable(true);
 
 
             $table->foreign('address_id')->references('address_id')->on('addresses');
-//            $table->foreign('created_by')->references('user_id')->on('users');
+            $table->foreign('created_by')->references('individual_id')->on('individuals');
         });
     }
 

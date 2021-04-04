@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public $timestamps = false;
+    protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
