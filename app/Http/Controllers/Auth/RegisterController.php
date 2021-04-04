@@ -25,17 +25,21 @@ class RegisterController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'cedula' => 'required|integer|unique:individuals,cedula',
-            'firstnames' => 'required|min:3',
-            'surnames' => 'required|min:6',
+            'firstnames' => 'required|alpha|min:3',
+            'surnames' => 'required|alpha|min:3',
             'birthday' => 'required|date',
-            'phone_number' => 'integer',
-            'sex' => 'required|enum:M,F',
-            'city_id' => 'required|exists:cities,name',
-            'municipality' => 'required|exists:municipalities,name',
-            'state' => 'required|exists:states,name',
+            'phone_number' => 'nullable|integer',
+            'sex' => 'required|in:M,F',
+            'city_id' => 'required|exists:cities,city_id',
+            'municipality' => 'required|exists:municipalities,municipality_id',
+            'state' => 'required|exists:states,state_id',
             'address_exact' => 'nullable',
             'password' => 'nullable|min:8'
         ]);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $address_data = $request->only(['city_id', 'address_exact']);
         $address = Address::create($address_data);

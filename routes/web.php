@@ -29,7 +29,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('control
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
-    });
+    })->name('home');
 
-    Route::post('/logout', 'LoginController@logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

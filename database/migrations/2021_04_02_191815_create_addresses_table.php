@@ -16,7 +16,7 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('address_id');
             $table->unsignedInteger('city_id')->nullable(false);
-            $table->string('address_exact', 200)->nullable(false);
+            $table->string('address_exact', 200)->nullable(true);
 
 
             $table->foreign('city_id')->references('city_id')->on('cities');
