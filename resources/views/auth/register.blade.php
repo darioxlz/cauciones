@@ -9,44 +9,46 @@
         const data_municipalities = @json($municipalities);
         const data_cities = @json($cities);
 
-        select_states.addEventListener('change', function (ev) {
-            let state_id = ev.target.value;
+        function popular_select(option_id, fieldType) {
+            if (option_id === 'INVALID') return;
+            let data = [];
 
-            if (state_id === 'INVALID') return;
+            // if states select changes... then clear municipalities select
+            if (fieldType === 'state') select_municipalities.innerHTML = '';
 
-            select_municipalities.innerHTML = '';
-            select_cities.innerHTML = '<option value="INVALID">Selecione una ciudad</option>';
+            // clear cities select when states or municipalities select changes
+            select_cities.innerHTML = '';
 
-            let populate_select_municipalities = data_municipalities.filter(municipalitiy => municipalitiy.state_id == state_id);
+            if (fieldType === 'state') {
+                data = data_municipalities.filter(municipalitiy => {
+                    return municipalitiy.state_id == option_id;
+                });
+            } else if (fieldType === 'municipality'){
+                data = data_cities.filter(city => {
+                    return city.municipality_id == option_id;
+                });
+            }
 
-
-            populate_select_municipalities.forEach(el => {
+            data.forEach(el => {
                 const option = document.createElement('option');
 
-                option.value = el.municipality_id;
+                option.value = fieldType === 'state' ? el.municipality_id : el.city_id;
                 option.innerText = el.name;
 
-                select_municipalities.appendChild(option);
+                // if states select changes... then i would populate municipalities select; else; i would populate cities select
+                fieldType === 'state' ? select_municipalities.appendChild(option) : select_cities.appendChild(option);
             });
+
+            // if states select changes... then i would populate municipalities and automatically populate cities select (using the first element of municipalities select)
+            if (fieldType === 'state') popular_select(data[0].municipality_id, 'municipality');
+        }
+
+        select_states.addEventListener('change', function (ev) {
+            popular_select(ev.target.value, 'state');
         });
 
         select_municipalities.addEventListener('change', function (ev) {
-            let municipality_id = ev.target.value;
-
-            if (municipality_id === 'INVALID') return;
-
-            select_cities.innerHTML = '';
-            let populate_select_cities = data_cities.filter(city => city.municipality_id == municipality_id);
-
-
-            populate_select_cities.forEach(el => {
-                const option = document.createElement('option');
-
-                option.value = el.city_id;
-                option.innerText = el.name;
-
-                select_cities.appendChild(option);
-            });
+            popular_select(ev.target.value, 'municipality');
         });
     </script>
 @endpush

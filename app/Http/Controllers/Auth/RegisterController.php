@@ -37,7 +37,7 @@ class RegisterController extends Controller
             'password' => 'nullable|min:8'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator);
         }
 
@@ -54,6 +54,8 @@ class RegisterController extends Controller
             User::create(array_merge($user_data, array('individual_id' => $individual->individual_id, 'permissions' => 'test')));
         }
 
-        return redirect()->route('form.login');
+        $redirect = $request->has('password') ? array('list_users' => 'true') : array();
+
+        return redirect()->route('individuals.list', $redirect);
     }
 }
