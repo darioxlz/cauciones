@@ -25,6 +25,7 @@ class Address extends Model
 
     public $timestamps = false;
     protected $primaryKey = 'address_id';
+    protected $table = 'addresses';
 
     /**
      * The attributes that are mass assignable.

@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Individual;
-use App\Models\User;
+use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
-class UserFactory extends Factory
+class AddressFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Address::class;
 
     /**
      * Define the model's default state.
@@ -23,12 +22,11 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $individuals = Individual::all();
+        $city_id = DB::table('cities')->get()->random()->city_id;
 
         return [
-            'individual_id' => $individuals->random()->individual_id,
-            'password' => '12345678',
-            'permissions' => 'test'
+            'city_id' => $city_id,
+            'address_exact' => $this->faker->text(50)
         ];
     }
 }

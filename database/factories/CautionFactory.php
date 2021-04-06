@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Individual;
+use App\Models\Caution;
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class CautionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Caution::class;
 
     /**
      * Define the model's default state.
@@ -23,12 +23,14 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $individuals = Individual::all();
+        $files = File::all();
+        $users = User::all();
 
         return [
-            'individual_id' => $individuals->random()->individual_id,
-            'password' => '12345678',
-            'permissions' => 'test'
+            'file_id' => $files->random()->file_id,
+            'image_path' => 'test',
+            'created_at' => date('Y-m-d'),
+            'created_by' => $users->random()->user_id
         ];
     }
 }

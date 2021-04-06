@@ -35,13 +35,8 @@ class Caution extends Model
     protected $primaryKey = 'caution_id';
 
     protected $fillable = [
-        'cedula',
-        'firstnames',
-        'surnames',
-        'birthday',
-        'phone_number',
-        'sex',
-        'address_id',
+        'file_id',
+        'image_path',
         'created_at',
         'created_by'
     ];

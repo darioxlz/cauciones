@@ -2,19 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Individual;
-use App\Models\User;
+use App\Models\Misdeed;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class MisdeedFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Misdeed::class;
 
     /**
      * Define the model's default state.
@@ -23,12 +21,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $individuals = Individual::all();
-
         return [
-            'individual_id' => $individuals->random()->individual_id,
-            'password' => '12345678',
-            'permissions' => 'test'
+            'description' => $this->faker->text(50)
         ];
     }
 }
