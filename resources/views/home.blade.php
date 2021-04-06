@@ -32,8 +32,8 @@
 
             <hr>
 
-            <a href="#" class="btn btn-block btnBlackMenu">Buscar notificaciones</a>
-            <a href="#" class="btn btn-block btnBlackMenu">Buscar cauciones</a>
+            <a href="{{route('notifications.list')}}" class="btn btn-block btnBlackMenu">Buscar notificaciones</a>
+            <a href="{{route('notifications.list')."?list_cautions=true"}}" class="btn btn-block btnBlackMenu">Buscar cauciones</a>
 
             <hr>
 

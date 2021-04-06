@@ -24,6 +24,10 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="d-flex justify-content-center">
+                {!! $data->appends(request()->input())->links() !!}
+            </div>
         </div>
     </div>
 @endsection

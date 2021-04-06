@@ -30,4 +30,24 @@ use Illuminate\Database\Eloquent\Model;
 class Caution extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+    protected $primaryKey = 'caution_id';
+
+    protected $fillable = [
+        'cedula',
+        'firstnames',
+        'surnames',
+        'birthday',
+        'phone_number',
+        'sex',
+        'address_id',
+        'created_at',
+        'created_by'
+    ];
+
+    public function file()
+    {
+        return $this->belongsTo(File::class, 'file_id', 'file_id');
+    }
 }

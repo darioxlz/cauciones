@@ -65,4 +65,9 @@ class Individual extends Model
     {
         return $this->hasOne(User::class, 'individual_id', 'individual_id');
     }
+
+    public function file()
+    {
+        return $this->hasMany(File::class, 'individual_id', 'individual_id');
+    }
 }

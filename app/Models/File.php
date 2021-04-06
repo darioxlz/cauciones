@@ -32,4 +32,30 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+    protected $primaryKey = 'file_id';
+
+    protected $fillable = [
+        'individual_id',
+        'misdeed_id',
+        'description',
+        'created_at',
+        'created_by'
+    ];
+
+    public function caution()
+    {
+        return $this->hasOne(Caution::class, 'file_id', 'file_id');
+    }
+
+    public function individual()
+    {
+        return $this->belongsTo(Individual::class, 'individual_id', 'individual_id');
+    }
+
+    public function misdeed()
+    {
+        return $this->belongsTo(Misdeed::class, 'misdeed_id', 'misdeed_id');
+    }
 }

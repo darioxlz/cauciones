@@ -20,4 +20,21 @@ use Illuminate\Database\Eloquent\Model;
 class Misdeed extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+    protected $primaryKey = 'misdeed_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'description',
+    ];
+
+    public function file()
+    {
+        return $this->hasMany(File::class, 'misdeed_id', 'misdeed_id');
+    }
 }
