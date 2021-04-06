@@ -27,17 +27,18 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('controlle
 
 // Protected Routes - allows only logged in users
 Route::middleware('auth')->group(function () {
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::view('/home', 'home');
 
     Route::get('/register', [RegisterController::class, 'show'])->name('form.register');
-    Route::post('/register', [RegisterController::class, 'register'])->name('controller.register');
+    Route::post('/register', [RegisterController::class, 'create'])->name('controller.register');
 
     // list individuals; if GET param ['list_users=true'] exists, this will be list users instead individuals
     Route::get('/individuals/list', [IndividualsController::class, 'index'])->name('individuals.list');
 
-    Route::get('/notifications/list', [NotificationsController::class, 'index'])->name('notifications.list');
+    Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.list');
+    Route::get('/notifications/create', [NotificationsController::class, 'form'])->name('notifications.create');
+
+    Route::post('/notifications', [NotificationsController::class, 'create'])->name('notifications.save');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

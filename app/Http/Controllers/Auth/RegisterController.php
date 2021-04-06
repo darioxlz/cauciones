@@ -21,7 +21,7 @@ class RegisterController extends Controller
         return view('auth.register')->with(compact('states', 'municipalities', 'cities'));
     }
 
-    public function register(Request $request)
+    public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'cedula' => 'required|integer|unique:individuals,cedula',

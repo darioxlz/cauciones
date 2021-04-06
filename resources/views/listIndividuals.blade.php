@@ -3,6 +3,8 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            <h1>@if(request()->has('list_users')) Usuarios @else Individuos @endif</h1>
+
             <table class="table table-hover table-striped table-bordered">
                 <thead class="thead-dark">
                     <tr>

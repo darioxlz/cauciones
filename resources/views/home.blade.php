@@ -27,8 +27,8 @@
         </div>
 
         <div class="col-md-4 well">
-            <a href="{{route('form.register')}}" class="btn btn-block btnBlackMenu">Registrar notificación</a>
-            <a href="{{route('form.register')."?create_user=true"}}" class="btn btn-block btnBlackMenu">Registrar caución</a>
+            <a href="{{route('notifications.create')}}" class="btn btn-block btnBlackMenu">Registrar notificación</a>
+            <a href="{{route('notifications.create')."?create_caution=true"}}" class="btn btn-block btnBlackMenu">Registrar caución</a>
 
             <hr>
 
